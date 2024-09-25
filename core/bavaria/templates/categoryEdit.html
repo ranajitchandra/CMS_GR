@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-3 grid-margin stretch-card">
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Edit Category Form</h4>
+                        <form action="{% url 'categoryUpadte' %}" method="POST" class="forms-sample">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Category Name</label>
+                                <input name="catid" type="hidden" class="form-control" id="exampleInputUsername1" Value="{{target_cat.id}}">
+                                <input name="catName" type="text" class="form-control" id="exampleInputUsername1" Value="{{target_cat.name}}">
+                            </div>
+                            <button type="submit" class="btn btn-primary me-2">Update</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+        </div>
+    </div>
+
+{% endblock content %}

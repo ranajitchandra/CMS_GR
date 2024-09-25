@@ -1,0 +1,233 @@
+        
+        <nav style="background:#fff;" class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">
+                    <i class="fa-solid fa-house menu-icon" style="color: #000;"></i>
+                    <span class="menu-title">Dashboard</span>
+                    </a>
+                </li>
+                
+                {% comment %} <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <i class="ti-palette menu-icon"></i>
+                        <span class="menu-title">Create</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                    <ul class="nav flex-column sub-menu list-unstyled">
+                        <li class="nav-item"> <a class="nav-link" href=""> Create Category</a></li>
+                    </ul>
+                    </div>
+                </li> {% endcomment %}
+            
+                {% if request.user.user_role == 'administrator' %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'categoryPage' %}">
+                    <i class="fa-solid fa-bars-progress menu-icon" style="color: #08a9c9;"></i>
+                    <span class="menu-title">Create</span>
+                    </a>
+                </li> 
+                {% comment %} <li class="nav-item">
+                    <a class="nav-link" href="pages/forms/basic_elements.html">
+                    <i class="ti-layout-list-post menu-icon"></i>
+                    <span class="menu-title">Form elements</span>
+                    </a>
+                </li>  {% endcomment %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'orderSummery' %}">
+                    <i class="fa-solid fa-scroll menu-icon" style="color: #d33665;"></i>
+                    <span class="menu-title">Order Summery</span>
+                    </a>
+                </li>
+                
+                {% endif %}
+                {% if request.user.user_role == 'administrator' or request.user.user_role == 'manager' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'budget_planing' %}">
+                    <i class="fa-brands fa-gitlab menu-icon" style="color: #0d49af;"></i>
+                    <span class="menu-title">Budget Planing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-industry menu-icon" style="color: #50c3a1;"></i>
+                    <span class="menu-title">Machine Layout</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-table menu-icon" style="color: #47009e;"></i>
+                    <span class="menu-title"> Fabric Purchase</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-scissors menu-icon" style="color: #bd0000;"></i>
+                    <span class="menu-title">Cutting</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if request.user.user_role == 'administrator' or request.user.user_role == 'editor' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-brands fa-deviantart menu-icon" style="color: #b000b3;"></i>
+                    <span class="menu-title">Embroidery </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-lines-leaning menu-icon" style="color: #08a9c9;"></i>
+                    <span class="menu-title">Sewing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-brands fa-bitbucket menu-icon" style="color: #d33665;"></i>
+                    <span class="menu-title">Production</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-check menu-icon" style="color: #47009e;"></i>
+                    <span class="menu-title">Quality Check</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-oil-can menu-icon" style="color: #2eb280;"></i>
+                    <span class="menu-title">Ironing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-box-archive menu-icon" style="color: #bd0000;"></i>
+                    <span class="menu-title">Packing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-ship menu-icon" style="color: #b000b3;"></i>
+                    <span class="menu-title">Shipping</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-dumpster menu-icon" style="color: #0d49af;"></i>
+                    <span class="menu-title">Stock</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-receipt menu-icon" style="color: #08a9c9;"></i>
+                    <span class="menu-title">Accounting</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-calculator menu-icon" style="color: #d33665;"></i>
+                    <span class="menu-title">Cost</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-recycle menu-icon" style="color: #47009e;"></i>
+                    <span class="menu-title">Templete</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-calendar-days menu-icon" style="color: #08a9c9;"></i>
+                    <span class="menu-title">Calendar</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-regular fa-calendar menu-icon" style="color: #b000b3;"></i>
+                    <span class="menu-title">Calendar View</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-brands fa-square-facebook menu-icon" style="color: #0076d1;"></i>
+                    <span class="menu-title">Facebook Template</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-brands fa-google menu-icon" style="color: #d26914;"></i>
+                    <span class="menu-title">Google Template</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-folder menu-icon" style="color: #5da7df;"></i>
+                    <span class="menu-title">Tac File</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-plus menu-icon" style="color: #08a9c9;"></i>
+                    <span class="menu-title">Add File</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    
+                    <i class="fa-brands fa-rocketchat menu-icon" style="color: #8500cc;"></i>
+                    <span class="menu-title">Chat</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-envelope menu-icon" style="color: #36c9c0;"></i>
+                    <span class="menu-title">Mail</span>
+                    </a>
+                </li>
+                
+                {% endif %}
+
+
+                {% comment %} <li class="nav-item">
+                    <a class="nav-link" href="pages/charts/chartjs.html">
+                    <i class="ti-pie-chart menu-icon"></i>
+                    <span class="menu-title">Charts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/tables/basic-table.html">
+                    <i class="ti-view-list-alt menu-icon"></i>
+                    <span class="menu-title">Tables</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/icons/themify.html">
+                    <i class="ti-star menu-icon"></i>
+                    <span class="menu-title">Icons</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                    <i class="ti-user menu-icon"></i>
+                    <span class="menu-title">User Pages</span>
+                    <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="auth">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a></li>
+                    </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="documentation/documentation.html">
+                    <i class="ti-write menu-icon"></i>
+                    <span class="menu-title">Documentation</span>
+                    </a>
+                </li> {% endcomment %}
+            </ul>
+        </nav>

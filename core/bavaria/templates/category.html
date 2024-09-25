@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div class="row">
+
+            <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Category Table</h4>
+                        <p class="card-description">
+                            <a class="btn btn-warning text-white right" href="{% url 'categoryForm' %}">Create Category</a>
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table table">
+                                <thead>
+                                    <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in allcat %}
+                                    <tr>
+                                        <td>{{row.id}}</td>
+                                        <td>{{row.name}}</td>
+                                        <td class="text-center">
+                                            <a class="text-danger text-decoration-none fs-5 p-2" href="{% url 'categoryDelete' row.id %}"><i class="ti-trash"></i></a>
+                                            <a class="text-success text-decoration-none fs-5 p-2" href="{% url 'categoryEdit' row.id %}"><i class="ti-ruler-pencil"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Sub Category Table</h4>
+                        <p class="card-description">
+                                <a class="btn btn-warning text-white right" href="{% url 'subCategoryForm' %}">Create Sub Category</a>
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Category Name</th>
+                                    <th>Sub Category Name</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in all_sub_cat %}
+                                <tr>
+                                    <td>{{row.id}}</td>
+                                    <td>{{row.category}}</td>
+                                    <td>{{row.name}}</td>
+                                    <td class="text-center">
+                                        <a class="text-danger text-decoration-none fs-5 p-2" href="{% url 'subCategoryDelete' row.id %}"><i class="ti-trash"></i></a>
+                                        <a class="text-success text-decoration-none fs-5 p-2" href="{% url 'subCategoryEdit' row.id %}"><i class="ti-ruler-pencil"></i></a>
+                                    </td>
+                                {% endfor %}
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock content %}

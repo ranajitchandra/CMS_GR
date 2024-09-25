@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <div class="row">
+            <div class="col-md-3 grid-margin stretch-card">
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                    <h4 class="card-title">Order form</h4>
+                    <p class="card-description">
+                        Basic form layout
+                    </p>
+                    
+                    <form action="" method="POST" class="forms-sample">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="cat" class="form-control" id="category" onchange="myid()">
+                                <option selected desabled>Select Category</option>
+                                {% for row in allcat %}
+                                <option value="{{row.id}}"{% if request.GET.catid == row.id|lower %}selected{% endif %}>{{row.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="exampleSelectSub-category">Sub Category</label>
+                            <select name="subCat" class="form-control" id="exampleSelectSub-category">
+                                {% for row in all_sub_cat %}
+                                <option value="{{row.id}}">{{row.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Order Reference</label>
+                            <input name="ref" type="text" class="form-control" id="exampleInputUsername1" placeholder="Order Reference">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Name</label>
+                            <input name="name" type="text" class="form-control" id="exampleInputUsername1" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Order Date</label>
+                            <input name="orDate" type="date" class="form-control" id="exampleInputEmail1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Delivery Date</label>
+                            <input name="deDate" type="date" class="form-control" id="exampleInputEmail1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Quantity</label>
+                            <input name="qnt" type="text" class="form-control" id="exampleInputPassword1" placeholder="Quantity">
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+            </div>
+        </div>
+        <script>
+            function myid(){
+                categoryid = document.getElementById('category').value;
+                window.location = "./?catid="+encodeURIComponent(categoryid);
+            }
+        </script>
+{% endblock content %}
+

@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+{% comment %} 
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <div class="row">
+            <div class="col-md-3 grid-margin stretch-card">
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Badget form</h4>
+                        <p class="card-description">
+                            Basic form layout
+                        </p>
+
+                        <form action="" method="POST" class="forms-sample">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select name="cat" class="form-control" id="category" onchange="countryfield()">
+                                    <option selected disabled>Select Category</option>
+                                    {% for row in allcat %}
+                                    <option value="{{ row.id }}" {% if request.GET.country == row.id %}selected{% endif %}>{{ row.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="SubCategory">Sub Category</label>
+                                <select name="subCat" class="form-control" id="SubCategory" onchange="statefield()">
+                                    <option selected disabled>Select Sub Category</option>
+                                    {% for row in all_sub_cat %}
+                                    <option value="{{ row.id }}" {% if request.GET.state == row.id %}selected{% endif %}>{{ row.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleSelectSub-category">Order Reference</label>
+                                <select name="orRef" class="form-control" id="exampleSelectSub-category">
+                                    {% for row in all_ref %}
+                                    <option value="{{ row.id }}">{{ row.order_reference }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <script>
+                                function countryfield() {
+                                    const countryid = document.getElementById('category').value;
+                                    window.location = "./?country=" + encodeURIComponent(countryid);
+                                }
+
+                                function statefield() {
+                                    const stateid = document.getElementById('SubCategory').value;
+                                    window.location = "./?country=" + encodeURIComponent('{{ request.GET.country }}') + "&state=" + encodeURIComponent(stateid);
+                                }
+                            </script>
+
+
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Date</label>
+                                <input name="bDate" type="date" class="form-control" id="exampleInputUsername1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Name</label>
+                                <input name="name" type="text" class="form-control" id="exampleInputUsername1" placeholder="Name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Maker Cost</label>
+                                <input name="mkCost" type="text" class="form-control" id="exampleInputUsername1" placeholder="Maker Cost">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Cutting Cost</label>
+                                <input name="cuttingCost" type="text" class="form-control" id="exampleInputUsername1" placeholder="Cutting Cost">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Sewing Cost</label>
+                                <input name="sewCost" type="text" class="form-control" id="exampleInputUsername1" placeholder="Sewing Cost">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Quality Check</label>
+                                <input name="qc" type="text" class="form-control" id="exampleInputUsername1" placeholder="Quality Check">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Ironing</label>
+                                <input name="ironing" type="text" class="form-control" id="exampleInputUsername1" placeholder="Ironing">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Packing Cost</label>
+                                <input name="pkgCost" type="text" class="form-control" id="exampleInputUsername1" placeholder="Packing Cost">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Budget Cost</label>
+                                <input name="budgetCost" type="text" class="form-control" id="exampleInputUsername1" placeholder="Budget Cost">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Actual Cost</label>
+                                <input name="actCost" type="text" class="form-control" id="exampleInputUsername1" placeholder="Actual Cost">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Quantity</label>
+                                <input name="qty" type="text" class="form-control" id="exampleInputPassword1" placeholder="Quantity">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+            </div>
+        </div>
+                    
+                    
+{% endblock content %}
+ {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Budget Form</h4>
+                    <p class="card-description">Basic form layout</p>
+
+                    <form action="" method="POST" class="forms-sample">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="cat" class="form-control" id="category" onchange="countryfield()">
+                                <option selected desabled>Select Category</option>
+                                {% for row in allcat %}
+                                <option value="{{row.id}}"{% if request.GET.country == row.id|lower %}selected{% endif %}>{{row.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                        {% comment %} <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="cat" class="form-control" id="category" onchange="countryfield()">
+                                <option selected disabled>Select Category</option>
+                                {% for row in allcat %}
+                                <option value="{{ row.id }}" {% if request.GET.country == row.id %}selected{% endif %}>{{ row.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div> {% endcomment %}
+
+
+
+                        {% comment %} <div class="form-group">
+                            <label for="SubCategory">Sub Category</label>
+                            <select name="subCat" class="form-control" id="SubCategory" onchange="statefield()">
+                                {% for row in all_sub_cat %}
+                                <option value="{{row.id}}" {% if request.GET.state == row.id %}selected{% endif %}>{{row.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div> {% endcomment %}
+
+
+
+                        <div class="form-group">
+                            <label for="SubCategory">Sub Category</label>
+                            <select name="subCat" class="form-control" id="SubCategory" onchange="statefield()">
+                                <option selected disabled>Select Sub Category</option>
+                                {% for row in all_sub_cat %}
+                                <option value="{{ row.id }}" {% if request.GET.state == row.id|lower %}selected{% endif %}>{{ row.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleSelectSub-category">Order Reference</label>
+                            <select name="orRef" class="form-control" id="exampleSelectSub-category">
+                                {% for row in all_ref %}
+                                <option value="{{ row.id }}">{{ row.order_reference }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <script>
+                            function countryfield() {
+                                const countryid = document.getElementById('category').value;
+                                window.location = "./?country=" + encodeURIComponent(countryid);
+                            }
+
+                            function statefield() {
+                                const stateid = document.getElementById('SubCategory').value;
+                                window.location = "./?country=" + encodeURIComponent('{{ request.GET.country }}') + "&state=" + encodeURIComponent(stateid);
+                            }
+                        </script>
+
+                        <div class="form-group">
+                            <label for="bDate">Date</label>
+                            <input name="bDate" type="date" class="form-control" id="bDate">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input name="name" type="text" class="form-control" id="name" placeholder="Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mkCost">Maker Cost</label>
+                            <input name="mkCost" type="text" class="form-control" id="mkCost" placeholder="Maker Cost">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cuttingCost">Cutting Cost</label>
+                            <input name="cuttingCost" type="text" class="form-control" id="cuttingCost" placeholder="Cutting Cost">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sewCost">Sewing Cost</label>
+                            <input name="sewCost" type="text" class="form-control" id="sewCost" placeholder="Sewing Cost">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="qc">Quality Check</label>
+                            <input name="qc" type="text" class="form-control" id="qc" placeholder="Quality Check">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ironing">Ironing</label>
+                            <input name="ironing" type="text" class="form-control" id="ironing" placeholder="Ironing">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pkgCost">Packing Cost</label>
+                            <input name="pkgCost" type="text" class="form-control" id="pkgCost" placeholder="Packing Cost">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budgetCost">Budget Cost</label>
+                            <input name="budgetCost" type="text" class="form-control" id="budgetCost" placeholder="Budget Cost">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="actCost">Actual Cost</label>
+                            <input name="actCost" type="text" class="form-control" id="actCost" placeholder="Actual Cost">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="qty">Quantity</label>
+                            <input name="qty" type="text" class="form-control" id="qty" placeholder="Quantity">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

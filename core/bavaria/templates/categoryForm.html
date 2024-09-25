@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-3 grid-margin stretch-card">
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Category form</h4>
+                        <form action="" method="POST" class="forms-sample">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Category Name</label>
+                                <input name="catName" type="text" class="form-control" id="exampleInputUsername1" placeholder="Category Name">
+                            </div>
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+        </div>
+    </div>
+
+{% endblock content %}

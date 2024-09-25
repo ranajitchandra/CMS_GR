@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-6 p-3">
+                        <form>
+                            <div class="row">
+                                <div class="col">
+                                <input type="date" class="form-control" placeholder="First name">
+                                </div>
+                                
+                                <div class="col">
+                                <input type="date" class="form-control" placeholder="Last name">
+                                </div>
+                                <div class="col">
+                                <input type="submit" class="btn btn-warning text-white" value="Search">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Budget Planing</h4>
+                    <p class="card-description">
+                        <a class="btn btn-warning text-white right" href="{% url 'budgetForm' %}">Add Budget</a>
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Sub-Category</th>
+                                <th>Order Reference</th>
+                                <th>Name</th>
+                                <th>Marker Cost</th>
+                                <th>Cutting Cost</th>
+                                <th>Sewing Cost</th>
+                                <th>Quality Check</th>
+                                <th>Ironing</th>
+                                <th>Packing Cost</th>
+                                <th>Quantity</th>
+                                <th>Budget Cost</th>
+                                <th>Actual Cost</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in budgetList %}
+                            <tr>
+                                <td>{{row.date}}</td>
+                                <td>{{row.category}}</td>
+                                <td>{{row.sub_category}}</td>
+                                <td>{{row.order_reference}}</td>
+                                <td>{{row.name}}</td>
+                                <td>{{row.marker_cost}}</td>
+                                <td>{{row.cutting_cost}}</td>
+                                <td>{{row.sewing_cost}}</td>
+                                <td>{{row.quality_check}}</td>
+                                <td>{{row.ironing}}</td>
+                                <td>{{row.packing_cost}}</td>
+                                <td>{{row.qty}}</td>
+                                <td>{{row.total_value}}</td>
+                                <td>{{row.actual_cost}}</td>
+                                <td>{{row.status}}</td>
+                                <td>
+
+                                {% if row.status == 'Pending' %}
+                                <a href="{% url 'budgetStart' row.id %}">Start</a> |
+                                <a href="{% url 'onGoing' row.id %}">On Going</a> |
+                                <a href="{% url 'budgetEnd' row.id %}">End</a>
+                                {% elif row.status == 'Start' %}
+                                <a href="{% url 'onGoing' row.id %}">On Going</a> |
+                                <a href="{% url 'budgetEnd' row.id %}">End</a>
+                                {% elif row.status == 'On_Going' %}
+                                <a href="{% url 'budgetStart' row.id %}">Start</a> |
+                                <a href="{% url 'budgetEnd' row.id %}">End</a>
+                                {% else %}
+
+                                <a href="{% url 'budgetStart' row.id %}">Start</a> |
+                                <a href="{% url 'onGoing' row.id %}">On Going</a>
+                                {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                    <nav class="d-flex justify-content-center p-4">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active">
+                            <a class="page-link" href="#">2 <span class="sr-only"></span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

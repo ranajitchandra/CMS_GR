@@ -10625,7 +10625,7 @@ progress {
 }
 
 .form-control::placeholder {
-  color: #c9c8c8;
+  color: #2c2c2e;
   opacity: 1;
 }
 
@@ -21370,7 +21370,7 @@ select.form-control {
   padding: .4375rem .75rem;
   border: 0;
   outline: 1px solid #c9ccd7;
-  color: #919191;
+  color: #212529;
 }
 
 select.form-control:focus {
@@ -21642,22 +21642,22 @@ dl li {
 
 .add-items input[type="text"]::-webkit-input-placeholder {
   font-size: 1rem;
-  color: #9b9b9b;
+  color: #302f2f;
 }
 
 .add-items input[type="text"]:-moz-placeholder {
   font-size: 1rem;
-  color: #9b9b9b;
+  color: #302f2f;
 }
 
 .add-items input[type="text"]::-moz-placeholder {
   font-size: 1rem;
-  color: #9b9b9b;
+  color: #302f2f;
 }
 
 .add-items input[type="text"]:-ms-input-placeholder {
   font-size: 1rem;
-  color: #9b9b9b;
+  color: #302f2f;
 }
 
 .add-items .btn {
@@ -21746,7 +21746,7 @@ dl li {
 }
 
 .auth .auth-form-light select {
-  color: #c9c8c8;
+  color: #212529;
 }
 
 .auth .auth-form-light .input-group .form-control:focus, .auth .auth-form-light .input-group .form-control:active {
@@ -22249,19 +22249,19 @@ dl li {
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-search .input-group .form-control::-webkit-input-placeholder {
-  color: #6c7383;
+  color: #2c2c2e;
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-search .input-group .form-control:-moz-placeholder {
-  color: #6c7383;
+  color: #2c2c2e;
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-search .input-group .form-control::-moz-placeholder {
-  color: #6c7383;
+  color: #2c2c2e;
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-search .input-group .form-control:-ms-input-placeholder {
-  color: #6c7383;
+  color: #2c2c2e;
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-settings {

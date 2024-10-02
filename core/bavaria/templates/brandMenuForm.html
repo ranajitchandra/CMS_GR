@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-3 grid-margin stretch-card">
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                    <h4 class="card-title">Sub Category form</h4>
+                    
+                    <form action="" method="POST" class="forms-sample">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="cat" class="form-control" id="category" onchange="countryfield()">
+                                <option selected desabled>Select Category</option>
+                                {% for row in allcat %}
+                                <option value="{{row.id}}"{% if request.GET.category == row.id|lower %}selected{% endif %}>{{row.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="SubCategory">Sub Category</label>
+                            <select name="subCat" class="form-control" id="SubCategory" onchange="statefield()">
+                                <option selected disabled>Select Sub Category</option>
+                                {% for row in all_sub_cat %}
+                                <option value="{{ row.id }}" {% if request.GET.subCategory == row.id|lower %}selected{% endif %}>{{ row.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <script>
+                            function countryfield() {
+                                const categoryid = document.getElementById('category').value;
+                                window.location = "./?category=" + encodeURIComponent(categoryid);
+                            }
+
+                            function statefield() {
+                                const subCatid = document.getElementById('SubCategory').value;
+                                window.location = "./?category=" + encodeURIComponent('{{ request.GET.category }}') + "&subCategory=" + encodeURIComponent(subCatid);
+                            }
+                        </script>
+                        <div class="form-group">
+                            <label for="exampleInputUsername2">Brand Name</label>
+                            <input name="brandName" type="text" class="form-control" id="exampleInputUsername2" placeholder="Brand Name">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+        </div>
+    </div>
+
+{% endblock content %}

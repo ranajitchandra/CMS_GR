@@ -1,5 +1,5 @@
         
-        <nav style="background:#fff;" class="sidebar sidebar-offcanvas" id="sidebar">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'home' %}">
@@ -7,34 +7,421 @@
                     <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
-                
-                {% comment %} <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                        <i class="ti-palette menu-icon"></i>
-                        <span class="menu-title">Create</span>
+
+
+
+                <li class="nav-item {% if request.path == '/orderForm/' or request.path == '/orderSummery/' %}active{% endif %}">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-order" aria-expanded="false" aria-controls="ui-order">
+                        <i class="fa-solid fa-scroll menu-icon" style="color: #d33665;"></i>
+                        <span class="menu-title">Order Summary</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu list-unstyled">
-                        <li class="nav-item"> <a class="nav-link" href=""> Create Category</a></li>
+                    <div class="collapse {% if request.path == '/orderForm/' or request.path == '/orderSummery/' %}show{% endif %}" id="ui-order">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/orderForm/' %}active{% endif %}" href="{% url 'orderForm' %}">Add Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/orderSummery/' %}active{% endif %}" href="{% url 'orderSummery' %}">Order List</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#">Wholesale Order</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Retailer Sale Order</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Unit Sale Order</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Production Sale Order</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item {% if request.path == '/budgetForm/' or request.path == '/budget_planing/' %}active{% endif %}">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-budget" aria-expanded="false" aria-controls="ui-budget">
+                        <i class="fa-brands fa-gitlab menu-icon" style="color: #0d49af;"></i>
+                        <span class="menu-title">Budget Summary</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse {% if request.path == '/budgetForm/' or request.path == '/budget_planing/' %}show{% endif %}" id="ui-budget">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/budgetForm/' %}active{% endif %}" href="{% url 'budgetForm' %}">Add Budget</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/budget_planing/' %}active{% endif %}" href="{% url 'budget_planing' %}">Budget List</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#">Wholesale Budget</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Retailer Sale Budget</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Unit Sale Budget</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Production Sale Budget</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-machine" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-industry menu-icon" style="color: #50c3a1;"></i>
+                        <span class="menu-title">Machine Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-machine">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Machine</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Machine</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Machine</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Machine</a></li>
                     </ul>
                     </div>
-                </li> {% endcomment %}
-            
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-fabric" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-table menu-icon" style="color: #47009e;"></i>
+                        <span class="menu-title">Fabric Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-fabric">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Fabric</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer  Fabric</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit  Fabric</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Fabric</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-cutting" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-scissors menu-icon" style="color: #bd0000;"></i>
+                        <span class="menu-title">Cutting Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-cutting">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Cutting</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Cutting</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Cutting</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Cutting</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-emb" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-brands fa-deviantart menu-icon" style="color: #b000b3;"></i>
+                        <span class="menu-title">Embroidery Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-emb">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Embroidery</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Embroidery</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Embroidery</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Embroidery</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-sewing" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-lines-leaning menu-icon" style="color: #08a9c9;"></i>
+                        <span class="menu-title">Sewing Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-sewing">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Sewing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Sewing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Sale Sewing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Sewing</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-production" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-brands fa-bitbucket menu-icon" style="color: #d33665;"></i>
+                        <span class="menu-title">Production Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-production">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Sewing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Sewing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Sewing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Sewing</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-qc" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-check menu-icon" style="color: #47009e;"></i>
+                        <span class="menu-title">Quality Check</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-qc">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Quality</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Quality</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Quality</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Quality</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-ironing" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-oil-can menu-icon" style="color: #2eb280;"></i>
+                        <span class="menu-title">Ironing Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-ironing">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Ironing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Ironing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Ironing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Ironing</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-packing" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-box-archive menu-icon" style="color: #bd0000;"></i>
+                        <span class="menu-title">Packing Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-packing">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Packing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Packing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Packing</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Packing</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-shipping" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-ship menu-icon" style="color: #b000b3;"></i>
+                        <span class="menu-title">Shipping Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-shipping">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Shipping</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Shipping</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Shipping</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Shipping</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-stock" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-dumpster menu-icon" style="color: #0d49af;"></i>
+                        <span class="menu-title">Stock Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-stock">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Stock</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Stock</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Stock</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Stock</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-account" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-receipt menu-icon" style="color: #08a9c9;"></i>
+                        <span class="menu-title">Account Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-account">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Wholesale Account</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Retailer Account</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Unit Account</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#">Production Account</a></li>
+                    </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-cost" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-calculator menu-icon" style="color: #d33665;"></i>
+                        <span class="menu-title">Cost Summery</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-cost">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Wholesale Cost</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Retailer Cost</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Unit Cost</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Production Cost</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-calender" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-calendar-days menu-icon" style="color: #08a9c9;"></i>
+                        <span class="menu-title">Calendar</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-calender">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="#">Wholesale Calendar</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Retailer Calendar</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Unit Calendar</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Production Calendar</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-calenderView" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-regular fa-calendar menu-icon" style="color: #b000b3;"></i>
+                        <span class="menu-title">Calendar View</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-calenderView">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="#">Wholesale view</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Retailer view</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Unit view</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Production view</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-tac" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="fa-solid fa-folder menu-icon" style="color: #5da7df;"></i>
+                        <span class="menu-title">Tac File</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-tac">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="#">Wholesale File</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Retailer Sale File</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Unit Sale File</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">Production Sale File</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-recycle menu-icon" style="color: #47009e;"></i>
+                    <span class="menu-title">Templete</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-brands fa-square-facebook menu-icon" style="color: #0076d1;"></i>
+                    <span class="menu-title">Facebook Template</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-brands fa-google menu-icon" style="color: #d26914;"></i>
+                    <span class="menu-title">Google Template</span>
+                    </a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    
+                    <i class="fa-brands fa-rocketchat menu-icon" style="color: #8500cc;"></i>
+                    <span class="menu-title">Chat</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                    <i class="fa-solid fa-envelope menu-icon" style="color: #36c9c0;"></i>
+                    <span class="menu-title">Mail</span>
+                    </a>
+                </li>
+                
+
                 {% if request.user.user_role == 'administrator' %}
 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'categoryPage' %}">
                     <i class="fa-solid fa-bars-progress menu-icon" style="color: #08a9c9;"></i>
-                    <span class="menu-title">Create</span>
+                    <span class="menu-title">People</span>
                     </a>
                 </li> 
-                {% comment %} <li class="nav-item">
-                    <a class="nav-link" href="pages/forms/basic_elements.html">
-                    <i class="ti-layout-list-post menu-icon"></i>
-                    <span class="menu-title">Form elements</span>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'categoryPage' %}">
+                    <i class="fa-solid fa-bars-progress menu-icon" style="color: #08a9c9;"></i>
+                    <span class="menu-title">User group</span>
                     </a>
-                </li>  {% endcomment %}
+                </li> 
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'categoryPage' %}">
+                    <i class="fa-solid fa-bars-progress menu-icon" style="color: #08a9c9;"></i>
+                    <span class="menu-title">Settings</span>
+                    </a>
+                </li> 
+
+                
+                {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+                <!--
+
+
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'orderSummery' %}">
                     <i class="fa-solid fa-scroll menu-icon" style="color: #d33665;"></i>
@@ -42,7 +429,6 @@
                     </a>
                 </li>
                 
-                {% endif %}
                 {% if request.user.user_role == 'administrator' or request.user.user_role == 'manager' %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'budget_planing' %}">
@@ -229,5 +615,6 @@
                     <span class="menu-title">Documentation</span>
                     </a>
                 </li> {% endcomment %}
+                //-->
             </ul>
         </nav>

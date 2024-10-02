@@ -150,16 +150,13 @@
                         {% csrf_token %}
 
                         <div class="form-group">
-                            <label for="bDate">Category</label>
-                            <input value="{{ request.GET.catid }}" name="cat" type="text" class="form-control" id="bDate">
+                            <input value="{{ request.GET.catid }}" name="cat" type="hidden" class="form-control" id="bDate">
                         </div>
                         <div class="form-group">
-                            <label for="bDate">Sub Category</label>
-                            <input value="{{ request.GET.subcatid }}" name="subcat" type="text" class="form-control" id="bDate">
+                            <input value="{{ request.GET.subcatid }}" name="subcat" type="hidden" class="form-control" id="bDate">
                         </div>
                         <div class="form-group">
-                            <label for="bDate">Order</label>
-                            <input value="{{ request.GET.orderid }}" name="order" type="text" class="form-control" id="bDate">
+                            <input value="{{ request.GET.orderid }}" name="order" type="hidden" class="form-control" id="bDate">
                         </div>
 
                         
@@ -204,10 +201,10 @@
                             <input name="pkgCost" type="text" class="form-control" id="pkgCost" placeholder="Packing Cost">
                         </div>
 
-                        <div class="form-group">
+                        {% comment %} <div class="form-group">
                             <label for="budgetCost">Budget Cost</label>
                             <input name="budgetCost" type="text" class="form-control" id="budgetCost" placeholder="Budget Cost">
-                        </div>
+                        </div> {% endcomment %}
 
                         <div class="form-group">
                             <label for="actCost">Actual Cost</label>
@@ -219,7 +216,7 @@
                             <input name="qty" type="text" class="form-control" id="qty" placeholder="Quantity">
                         </div>
 
-                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <button type="submit" name="sub" class="btn btn-primary me-2">Submit</button>
                     </form>
                 </div>
             </div>

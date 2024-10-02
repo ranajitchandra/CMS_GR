@@ -14,15 +14,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
 from bavaria.views import *
+from bavaria.orderViews import *
+from bavaria.budgetViews import *
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', base, name='base'),
     path('home', home, name='home'),
     path('signupPage/', signupPage, name='signupPage'),
+    path('retailerReg/', retailerReg, name='retailerReg'),
     path('', signin, name='signin'),
     path('logoutpage', logoutpage, name='logoutpage'),
     # category Routing,
@@ -37,9 +42,14 @@ urlpatterns = [
     path('subCategoryEdit/<int:subCatid>', subCategoryEdit, name='subCategoryEdit'),
     path('subCategoryUpadte/', subCategoryUpadte, name='subCategoryUpadte'),
 
+    path('brandNameForm/', brandNameForm, name='brandNameForm'),
+
     # Order Routing,
     path('orderSummery/', orderSummery, name='orderSummery'),
     path('orderForm/', orderForm, name='orderForm'),
+    path('orderDelete/<int:orderid>', orderDelete, name='orderDelete'),
+    path('orderEdit/<int:orderid>', orderEdit, name='orderEdit'),
+    path('orderUpdate/', orderUpdate, name='orderUpdate'),
 
     # Budget Routing,
     path('budget_planing/', budget_planing, name='budget_planing'),
@@ -48,4 +58,9 @@ urlpatterns = [
     path('onGoing/<int:myid>', onGoing, name='onGoing'),
     path('budgetEnd/<int:myid>', budgetEnd, name='budgetEnd'),
     path('ab/', ab, name='ab'),
-]
+    path('getBudget/<int:bID>', getBudget, name='getBudget'),
+
+
+
+
+] 

@@ -17,6 +17,12 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{% static 'images/favicon.png' %}"/>
+  <style>
+    input{
+        color:red;
+    }
+
+  </style>
 </head>
 
 <body>
@@ -31,7 +37,7 @@
                     <div class="brand-logo">
                         <img src="{% static 'images/logomain.svg' %}" alt="logo">
                     </div>
-                    <div class="btn-group p" role="group" aria-label="Basic example">
+                    <div class="group col-auto" role="group" aria-label="Basic example">
                         <a href="#" class="btn btn-warning m-2 text-white">Whole Sale</a>
                         <a href="{% url 'retailerReg' %}" class="btn btn-warning m-2 text-white">Retailer Sale</a>
                         <a href="#" class="btn btn-warning m-2 text-white">Unit Sale</a>
@@ -40,34 +46,149 @@
                     <form action="" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="exampleInputUsername1">Full Name</label>
-                            <input name="fname" type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Full Name">
+                            <label for="exampleInputUsername1">Name</label>
+                            <input name="user_name" type="text" class="form-control" id="exampleInputUsername1" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputUsername1">Username</label>
-                            <input name="user_name" type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username">
+                            <label for="exampleInputUsername1">Company Name</label>
+                            <input name="user_name" type="text" class="form-control" id="exampleInputUsername1" placeholder="Company Name">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputUsername1">Email</label>
-                            <input name="email" type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputUsername1">Phone Number</label>
+                            <input name="user_name" type="text" class="form-control" id="exampleInputUsername1" placeholder="Phone Number">
+                        </div>
+
+                        <div class="select_option">
+                            <label for="exampleInputdate">Country</label>
+                            <select class="form-select country" aria-label="Default select example" onchange="loadStates()">
+                                <option selected>Select Country</option>
+                            </select>
+                            <select class="form-select state" aria-label="Default select example" onchange="loadCities()">
+                                <option selected>Select State</option>
+                            </select>
+                            <select class="form-select city" aria-label="Default select example">
+                                <option selected>Select City</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">Address</label>
+                            <input name="user_name" type="text" class="form-control" id="exampleInputUsername1" placeholder="Address">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername1">ZIP/Postal Code</label>
+                            <input name="user_name" type="text" class="form-control" id="exampleInputUsername1" placeholder="Postal Code">
+                        </div>
+                        <script>
+                                var config = {
+                                    cUrl: 'https://api.countrystatecity.in/v1/countries',
+                                    ckey: 'NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA=='
+                                }
+
+
+                                var countrySelect = document.querySelector('.country'),
+                                    stateSelect = document.querySelector('.state'),
+                                    citySelect = document.querySelector('.city')
+
+
+                                function loadCountries() {
+
+                                    let apiEndPoint = config.cUrl
+
+                                    fetch(apiEndPoint, {headers: {"X-CSCAPI-KEY": config.ckey}})
+                                    .then(Response => Response.json())
+                                    .then(data => {
+                                        // console.log(data);
+
+                                        data.forEach(country => {
+                                            const option = document.createElement('option')
+                                            option.value = country.iso2
+                                            option.textContent = country.name 
+                                            countrySelect.appendChild(option)
+                                        })
+                                    })
+                                    .catch(error => console.error('Error loading countries:', error))
+
+                                    stateSelect.disabled = true
+                                    citySelect.disabled = true
+                                    stateSelect.style.pointerEvents = 'none'
+                                    citySelect.style.pointerEvents = 'none'
+                                }
+
+
+                                function loadStates() {
+                                    stateSelect.disabled = false
+                                    citySelect.disabled = true
+                                    stateSelect.style.pointerEvents = 'auto'
+                                    citySelect.style.pointerEvents = 'none'
+
+                                    const selectedCountryCode = countrySelect.value
+                                    // console.log(selectedCountryCode);
+                                    stateSelect.innerHTML = '<option value="">Select State</option>' // for clearing the existing states
+                                    citySelect.innerHTML = '<option value="">Select City</option>' // Clear existing city options
+
+                                    fetch(`${config.cUrl}/${selectedCountryCode}/states`, {headers: {"X-CSCAPI-KEY": config.ckey}})
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // console.log(data);
+
+                                        data.forEach(state => {
+                                            const option = document.createElement('option')
+                                            option.value = state.iso2
+                                            option.textContent = state.name 
+                                            stateSelect.appendChild(option)
+                                        })
+                                    })
+                                    .catch(error => console.error('Error loading countries:', error))
+                                }
+
+
+                                function loadCities() {
+                                    citySelect.disabled = false
+                                    citySelect.style.pointerEvents = 'auto'
+
+                                    const selectedCountryCode = countrySelect.value
+                                    const selectedStateCode = stateSelect.value
+                                    // console.log(selectedCountryCode, selectedStateCode);
+
+                                    citySelect.innerHTML = '<option value="">Select City</option>' // Clear existing city options
+
+                                    fetch(`${config.cUrl}/${selectedCountryCode}/states/${selectedStateCode}/cities`, {headers: {"X-CSCAPI-KEY": config.ckey}})
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // console.log(data);
+
+                                        data.forEach(city => {
+                                            const option = document.createElement('option')
+                                            option.value = city.iso2
+                                            option.textContent = city.name 
+                                            citySelect.appendChild(option)
+                                        })
+                                    })
+                                }
+
+                                window.onload = loadCountries
+
+
+                        </script>
+
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input name="pass" type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                            <input name="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword2">Confirm Password</label>
-                            <input name="cpass" type="password" class="form-control form-control-lg" id="exampleInputPassword2" placeholder="Confirm Password">
+                            <input name="cpass" type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputdate">Address</label>
-                            <input name="address" type="Text" class="form-control form-control-lg" id="exampleInputdate" placeholder="Address">
-                        </div>
-        
+
                         <!--
                         <div class="form-group">
                             <label for="exampleFormControlSelect3">Country</label>
-                            <select id="country" name="country" class="form-control form-control-lg">
+                            <select id="country" name="country" class="form-control">
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Åland Islands">Åland Islands</option>
                                 <option value="Albania">Albania</option>
@@ -315,117 +436,84 @@
                             </select>
                         </div>
                         //-->
-                        <div class="select_option">
-                            <select class="form-select country" aria-label="Default select example" onchange="loadStates()">
-                                <option selected>Select Country</option>
+                        
+
+                        <div class="form-group">
+                            <label for="exampleInputdate">Company Position</label>
+                            <input name="dob" type="Text" class="form-control" id="exampleInputdate" placeholder="Company Position">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputdate">Company Registion Number</label>
+                            <input name="dob" type="Text" class="form-control" id="exampleInputdate" placeholder="Company Registion Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputdate">Company Tex Number</label>
+                            <input name="dob" type="Text" class="form-control" id="exampleInputdate" placeholder="Company Tex Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputdate">Company Starting Date</label>
+                            <input name="dob" type="Text" class="form-control" id="exampleInputdate" placeholder="Company Starting Date">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputdate">Company Annual Sell?</label>
+                            <input name="dob" type="Text" class="form-control" id="exampleInputdate" placeholder="Company Annual Sell">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="exampleSelect">How Many Staff Does the Company Have?</label>
+                            <select name="staffCount" class="form-control" id="exampleSelect">
+                                <option value="" disabled selected>Select number of staff</option>
+                                <option value="1-10">1-10</option>
+                                <option value="11-50">11-50</option>
+                                <option value="51-100">51-100</option>
+                                <option value="101-500">101-500</option>
+                                <option value="500+">500+</option>
                             </select>
-                            <select class="form-select state" aria-label="Default select example" onchange="loadCities()">
-                                <option selected>Select State</option>
+                        </div>
+                        <div class="form-group">
+                            <label for="branchSelect">How Many Branches Does the Company Have?</label>
+                            <select name="branchCount" class="form-control" id="branchSelect">
+                                <option value="" disabled selected>Select number of branches</option>
+                                <option value="1">1</option>
+                                <option value="2-5">2-5</option>
+                                <option value="6-10">6-10</option>
+                                <option value="11-20">11-20</option>
+                                <option value="20+">20+</option>
                             </select>
-                            <select class="form-select city" aria-label="Default select example">
-                                <option selected>Select City</option>
+                        </div>
+                        <div class="form-group">
+                            <label for="locationSelect">Sale Location</label>
+                            <select class="form-control" id="locationSelect">
+                                <option value="" disabled selected>Select a location</option>
+                                <option value="marketplace">Market Place</option>
+                                <option value="residential">Residential</option>
+                                <option value="railway_station">Railway Station</option>
+                                <option value="bus_stand">Bus Stand</option>
+                                <option value="highway">Highway</option>
+                                <option value="school_college">School/College</option>
+                                <option value="hospital">Hospital/Nursing Home</option>
+                                <option value="office_industry">Office/Industry</option>
+                                <option value="tourist_place">Tourist Place</option>
+                                <option value="airport">Airport</option>
+                                <option value="others">Others</option>
                             </select>
                         </div>
 
-                        <script>
-                                var config = {
-                                    cUrl: 'https://api.countrystatecity.in/v1/countries',
-                                    ckey: 'NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA=='
-                                }
-
-
-                                var countrySelect = document.querySelector('.country'),
-                                    stateSelect = document.querySelector('.state'),
-                                    citySelect = document.querySelector('.city')
-
-
-                                function loadCountries() {
-
-                                    let apiEndPoint = config.cUrl
-
-                                    fetch(apiEndPoint, {headers: {"X-CSCAPI-KEY": config.ckey}})
-                                    .then(Response => Response.json())
-                                    .then(data => {
-                                        // console.log(data);
-
-                                        data.forEach(country => {
-                                            const option = document.createElement('option')
-                                            option.value = country.iso2
-                                            option.textContent = country.name 
-                                            countrySelect.appendChild(option)
-                                        })
-                                    })
-                                    .catch(error => console.error('Error loading countries:', error))
-
-                                    stateSelect.disabled = true
-                                    citySelect.disabled = true
-                                    stateSelect.style.pointerEvents = 'none'
-                                    citySelect.style.pointerEvents = 'none'
-                                }
-
-
-                                function loadStates() {
-                                    stateSelect.disabled = false
-                                    citySelect.disabled = true
-                                    stateSelect.style.pointerEvents = 'auto'
-                                    citySelect.style.pointerEvents = 'none'
-
-                                    const selectedCountryCode = countrySelect.value
-                                    // console.log(selectedCountryCode);
-                                    stateSelect.innerHTML = '<option value="">Select State</option>' // for clearing the existing states
-                                    citySelect.innerHTML = '<option value="">Select City</option>' // Clear existing city options
-
-                                    fetch(`${config.cUrl}/${selectedCountryCode}/states`, {headers: {"X-CSCAPI-KEY": config.ckey}})
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        // console.log(data);
-
-                                        data.forEach(state => {
-                                            const option = document.createElement('option')
-                                            option.value = state.iso2
-                                            option.textContent = state.name 
-                                            stateSelect.appendChild(option)
-                                        })
-                                    })
-                                    .catch(error => console.error('Error loading countries:', error))
-                                }
-
-
-                                function loadCities() {
-                                    citySelect.disabled = false
-                                    citySelect.style.pointerEvents = 'auto'
-
-                                    const selectedCountryCode = countrySelect.value
-                                    const selectedStateCode = stateSelect.value
-                                    // console.log(selectedCountryCode, selectedStateCode);
-
-                                    citySelect.innerHTML = '<option value="">Select City</option>' // Clear existing city options
-
-                                    fetch(`${config.cUrl}/${selectedCountryCode}/states/${selectedStateCode}/cities`, {headers: {"X-CSCAPI-KEY": config.ckey}})
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        // console.log(data);
-
-                                        data.forEach(city => {
-                                            const option = document.createElement('option')
-                                            option.value = city.iso2
-                                            option.textContent = city.name 
-                                            citySelect.appendChild(option)
-                                        })
-                                    })
-                                }
-
-                                window.onload = loadCountries
-
-
-                        </script>
-
-
-
+                        <div class="form-group">
+                            <label for="brandSelect">Which Brands Does the Company Sell?</label>
+                            <select name="brand" class="form-control" id="brandSelect">
+                                <option value="" disabled selected>Select a brand</option>
+                                <option value="Brand A">Brand A</option>
+                                <option value="Brand B">Brand B</option>
+                                <option value="Brand C">Brand C</option>
+                                <option value="Brand D">Brand D</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlSelect3">Gender</label>
-                            <select name="gender" class="form-control form-control-lg" id="exampleFormControlSelect3">
+                            <select name="gender" class="form-control" id="exampleFormControlSelect3">
                                 <option selected disabled>Select Gender</option>
                                 <option value="administrator">Male</option>
                                 <option value="manager">Female</option>
@@ -433,7 +521,7 @@
                         </div>
                         {% comment %} <div class="form-group">
                             <label for="exampleFormControlSelect2">Role</label>
-                            <select name="user_role" class="form-control form-control-lg" id="exampleFormControlSelect2">
+                            <select name="user_role" class="form-control" id="exampleFormControlSelect2">
                                 <option selected disabled>Select Role</option>
                                 <option value="administrator">Administrator</option>
                                 <option value="manager">Manager</option>
@@ -441,7 +529,7 @@
                             </select>
                         </div> {% endcomment %}
                         <div class="form-group mb-3">
-                            <label for="formFile" class="form-label">Profile Photo</label>
+                            <label for="formFile" class="form-label">Attachment File</label>
                             <input name="img" class="form-control" type="file" id="formFile">
                         </div>
                         <div class="mb-4">

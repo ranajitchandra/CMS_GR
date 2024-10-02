@@ -14,8 +14,6 @@ class Custom_User(AbstractUser):
 
 
 
-
-
 class categoryModel(models.Model):
     name=models.CharField(max_length=30, null=True)
     def __str__(self):
@@ -26,7 +24,14 @@ class sub_categoryModel(models.Model):
     category=models.ForeignKey(categoryModel, on_delete=models.CASCADE, null=True)
     name=models.CharField(max_length=30, null=True)
     def __str__(self):
-        return self.category.name +'-'+self.name
+        return self.name
+    
+class brandNmaeModel(models.Model):
+    category=models.ForeignKey(categoryModel, on_delete=models.CASCADE, null=True)
+    subcategory=models.ForeignKey(sub_categoryModel, on_delete=models.CASCADE, null=True)
+    name=models.CharField(max_length=30, null=True)
+    def __str__(self):
+        return self.name
     
 
 
@@ -47,7 +52,7 @@ class Order(models.Model):
 
     category = models.ForeignKey(categoryModel, on_delete=models.CASCADE, null=True)
     sub_category = models.ForeignKey(sub_categoryModel, on_delete=models.CASCADE, null=True)
-    order_reference = models.CharField(max_length=100, unique=True)
+    order_reference = models.CharField(max_length=50, unique=True)
     order_date = models.DateField(null=True)
     delivery_date = models.DateField(null=True)
     name = models.CharField(max_length=255, null=True)
@@ -84,7 +89,7 @@ class budgetPlaning(models.Model):
     date = models.DateField(null=True)
     category = models.ForeignKey(categoryModel, on_delete=models.CASCADE, null=True)
     sub_category = models.ForeignKey(sub_categoryModel, on_delete=models.CASCADE, null=True)
-    order_reference = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)
+    order_reference = models.OneToOneField(Order, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100, null=True)
     marker_cost = models.IntegerField(null=True)
     cutting_cost = models.IntegerField(null=True)

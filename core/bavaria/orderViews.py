@@ -20,8 +20,12 @@ context={
 @login_required
 def orderForm(request):
     allcategory=categoryModel.objects.all()
+
     getCategoryID = request.GET.get('catid', None)
     sub_category=sub_categoryModel.objects.filter(category=getCategoryID)
+
+    getsubCategoryID = request.GET.get('subcatid', None)
+    brand=brandNmaeModel.objects.filter(category=getsubCategoryID)
     
     if Order.objects.count() == 0:
         autoNum = 'bge1'  # Starting value for autoNum
@@ -42,6 +46,7 @@ def orderForm(request):
     context = {
             'allcat' : allcategory,
             'all_sub_cat' : sub_category,
+            'all_brand' : brand,
             'autonum' : autoNum,
         }
     
@@ -50,7 +55,9 @@ def orderForm(request):
         cat = get_object_or_404(categoryModel, id=catid)
         subcatid=request.POST.get('subCat')
         subcat = get_object_or_404(sub_categoryModel, id=subcatid)
-        ref=request.POST.get('ref')
+        brandid=request.POST.get('brandName')
+        brand = get_object_or_404(brandNmaeModel, id=brandid)
+        ref=request.POST.get('orderNum')
         name=request.POST.get('name')
         orDate=request.POST.get('orDate')
         deDate=request.POST.get('deDate')
@@ -60,6 +67,7 @@ def orderForm(request):
         save_order = Order(
             category=cat,
             sub_category=subcat,
+            brandModel=brand,
             order_reference=ref,
             order_date=orDate,
             delivery_date=deDate,

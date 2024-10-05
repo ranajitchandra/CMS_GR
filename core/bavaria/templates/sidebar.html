@@ -7,6 +7,12 @@
                     <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
+                <li class="nav-item {% if request.path == '/categoryPage/' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'categoryPage' %}">
+                        <i class="ti-view-list-alt menu-icon" style="color: #08a9c9;"></i>
+                        <span class="menu-title">Create</span>
+                    </a>
+                </li>
 
 
 

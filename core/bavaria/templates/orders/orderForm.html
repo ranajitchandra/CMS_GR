@@ -2,80 +2,178 @@
 
 {% block content %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <div class="row">
-            <div class="col-md-3 grid-margin stretch-card">
-            </div>
-            <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                    <h4 class="card-title">Order form</h4>
-                    <p class="card-description">
-                        Basic form layout
-                    </p>
-                    
-                    <form action="" method="POST" class="forms-sample">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="category">Category</label>
-                            <select name="cat" class="form-control" id="category" onchange="myid()">
-                                <option selected desabled>Select Category</option>
-                                {% for row in allcat %}
-                                <option value="{{row.id}}"{% if request.GET.catid == row.id|lower %}selected{% endif %}>{{row.name}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="exampleSelectSub-category">Sub Category</label>
-                            <select name="subCat" class="form-control" id="exampleSelectSub-category">
-                                {% for row in all_sub_cat %}
-                                <option value="{{row.id}}">{{row.name}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Brand Name </label>
-                            <input name="ref" type="text" class="form-control" id="exampleInputUsername1" placeholder="Brand Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Order Reference</label>
-                            <input name="ref" type="text" class="form-control" id="exampleInputUsername1" value="{{autonum}}" >
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Name</label>
-                            <input name="name" type="text" class="form-control" id="exampleInputUsername1" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Order Date</label>
-                            <input name="orDate" type="date" class="form-control" id="exampleInputEmail1">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Delivery Date</label>
-                            <input name="deDate" type="date" class="form-control" id="exampleInputEmail1">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Quantity</label>
-                            <input name="qnt" type="text" class="form-control" id="exampleInputPassword1" placeholder="Quantity">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Description</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    </form>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<div class="row">
+    <div class="col-md-3 grid-margin stretch-card"></div>
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Order Form</h4>
+                <p class="card-description">Basic form layout</p>
+
+                <form action="" method="POST" class="forms-sample">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select name="cat" class="form-control" id="category" onchange="updateCategory()">
+                            <option selected disabled>Select Category</option>
+                            {% for row in allcat %}
+                                <option value="{{ row.id }}"{% if request.GET.catid == row.id|lower %} selected{% endif %}>{{ row.name }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3 grid-margin stretch-card">
+
+                    <div class="form-group">
+                        <label for="subCategory">Sub Category</label>
+                        <select name="subCat" class="form-control" id="subCategory" onchange="updateSubCategory()">
+                            <option selected disabled>Select Sub Category</option>
+                            {% for row in all_sub_cat %}
+                                <option value="{{ row.id }}" {% if request.GET.subcatid == row.id|lower %}selected{% endif %}>{{ row.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="brandName">Brand Name</label>
+                        <select name="brandName" class="form-control" id="brandName" onchange="updateBrand()">
+                            <option selected disabled>Select Brand</option>
+                            {% for row in all_brand %}
+                                <option value="{{ row.id }}" {% if request.GET.brandID == row.id|lower %}selected{% endif %}>{{ row.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number</label>
+                        <input name="orderNum" type="text" class="form-control" id="orderNumber" value="{{ autonum }}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productName">Product Name</label>
+                        <input name="ref" type="text" class="form-control" id="productName" placeholder="Product Name">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="customerName">Name</label>
+                        <input name="name" type="text" class="form-control" id="customerName" placeholder="Name">
+                    </div>
+
+                    <div class="form-group d-flex align-items-center">
+                        <input type="text" class="form-control flex-grow-1" id="fabric" placeholder="Click to add fabric details" readonly>
+                        <button type="button" class="btn btn-secondary ms-1" data-toggle="modal" data-target="#fabricModal"><i class="fa-solid fa-plus" style="color: #f0f0f0;"></i></button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderDate">Order Date</label>
+                        <input name="orDate" type="date" class="form-control" id="orderDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deliveryDate">Delivery Date</label>
+                        <input name="deDate" type="date" class="form-control" id="deliveryDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input name="qnt" type="text" class="form-control" id="quantity" placeholder="Quantity">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
             </div>
         </div>
-        <script>
-            function myid(){
-                categoryid = document.getElementById('category').value;
-                window.location = "./?catid="+encodeURIComponent(categoryid);
-            }
-            
-        </script>
-{% endblock content %}
+    </div>
+    <div class="col-md-3 grid-margin stretch-card"></div>
+</div>
 
+<!-- Fabric Modal -->
+<div class="modal fade" id="fabricModal" tabindex="-1" aria-labelledby="fabricModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fabricModalLabel">Fabric Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="fabricDetailsForm">
+                    <div class="form-group">
+                        <label for="fabricType">Fabric Type</label>
+                        <input type="text" class="form-control" id="fabricType" placeholder="Enter fabric type" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fabricColor">Fabric Color</label>
+                        <input type="text" class="form-control" id="fabricColor" placeholder="Enter fabric color" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fabricWidth">Fabric Width</label>
+                        <input type="text" class="form-control" id="fabricWidth" placeholder="Enter fabric width" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fabricGSM">Fabric GSM</label>
+                        <input type="text" class="form-control" id="fabricGSM" placeholder="Enter fabric GSM" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fabricComposition">Fabric Composition</label>
+                        <input type="text" class="form-control" id="fabricComposition" placeholder="Enter fabric composition" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="careInstructions">Care Instructions</label>
+                        <textarea class="form-control" id="careInstructions" rows="3" placeholder="Enter care instructions" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning text-white close" id="saveFabricDetails" data-dismiss="modal" aria-label="Close">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateCategory() {
+        const categoryId = document.getElementById('category').value;
+        window.location = "./?catid=" + encodeURIComponent(categoryId);
+    }
+
+    function updateSubCategory() {
+        const categoryId = document.getElementById('category').value;
+        const subcategoryId = document.getElementById('subCategory').value;
+        window.location = "./?catid=" + encodeURIComponent(categoryId) + "&subcatid=" + encodeURIComponent(subcategoryId);
+    }
+    function updateBrand() {
+        const categoryId = document.getElementById('category').value;
+        const subcategoryId = document.getElementById('subCategory').value;
+        const brandid = document.getElementById('brandName').value;
+        window.location = "./?catid=" + encodeURIComponent(categoryId) + "&subcatid=" + encodeURIComponent(subcategoryId) + "&brandID=" + encodeURIComponent(brandid);
+    }
+
+    document.getElementById('saveFabricDetails').onclick = function() {
+        const fabricType = document.getElementById('fabricType').value;
+        const fabricColor = document.getElementById('fabricColor').value;
+        const fabricWidth = document.getElementById('fabricWidth').value;
+        const fabricGSM = document.getElementById('fabricGSM').value;
+        const fabricComposition = document.getElementById('fabricComposition').value;
+        const careInstructions = document.getElementById('careInstructions').value;
+
+        // Format the fabric details
+        const fabricDetails = `Color: ${fabricColor}, Type: ${fabricType}, Width: ${fabricWidth}, GSM: ${fabricGSM}, Composition: ${fabricComposition}, Care: ${careInstructions}`;
+        document.getElementById('fabric').value = fabricDetails;
+
+        // Hide the modal
+        $('#fabricModal').modal('hide');
+
+        // Reset the modal fields after saving
+        document.getElementById('fabricDetailsForm').reset();
+    };
+</script>
+{% endblock content %}

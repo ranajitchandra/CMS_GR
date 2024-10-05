@@ -29,14 +29,16 @@
             <div class="col-lg-5 mx-auto">
                 <div class="auth-form-light text-left py-5 px-4 px-sm-5">
                     <div class="brand-logo">
-                        <img src="{% static 'images/logomain.svg' %}" alt="logo">
+                        <a href="{% url 'signupPage' %}"><img src="{% static 'images/logomain.svg' %}" alt="logo"></a>
                     </div>
                     <div class="btn-group p" role="group" aria-label="Basic example">
-                        <a href="#" class="btn btn-warning m-2 text-white">Whole Sale</a>
-                        <a href="{% url 'retailerReg' %}" class="btn btn-warning m-2 text-white">Retailer Sale</a>
-                        <a href="#" class="btn btn-warning m-2 text-white">Unit Sale</a>
-                        <a href="#" class="btn btn-warning m-2 text-white">Production Sale</a>
+                        <a href="{% url 'reg_wholeSale' %}" class="btn btn-warning m-2 text-white {% if request.path == '/reg_wholeSale/' %}btn-danger{% endif %}">WholeSale</a>
+                        <a href="{% url 'retailerReg' %}" class="btn btn-warning m-2 text-white {% if request.path == '/retailerReg/' %}btn-danger{% endif %}">Retailer Sale</a>
+                        <a href="{% url 'reg_unitReg' %}" class="btn btn-warning m-2 text-white {% if request.path == '/reg_unitReg/' %}btn-danger{% endif %}">Unit Sale</a>
+                        <a href="{% url 'reg_ProductionSale' %}" class="btn btn-warning m-2 text-white {% if request.path == '/reg_ProductionSale/' %}btn-danger{% endif %}">Prodiction Sale</a>
                     </div>
+
+                    <h3 class="py-4 fs-5">Registration Form</h3>
                     <form action="" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">

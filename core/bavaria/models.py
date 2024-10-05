@@ -52,6 +52,7 @@ class Order(models.Model):
 
     category = models.ForeignKey(categoryModel, on_delete=models.CASCADE, null=True)
     sub_category = models.ForeignKey(sub_categoryModel, on_delete=models.CASCADE, null=True)
+    brandModel = models.ForeignKey(brandNmaeModel, on_delete=models.CASCADE, null=True)
     order_reference = models.CharField(max_length=50, unique=True)
     order_date = models.DateField(null=True)
     delivery_date = models.DateField(null=True)

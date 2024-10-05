@@ -3,7 +3,7 @@
 {% block content %}
         <div class="row">
 
-            <div class="col-lg-4 grid-margin stretch-card">
+            <div class="col-lg-3 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Category Table</h4>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 grid-margin stretch-card">
+            <div class="col-lg-5 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Brand Name</h4>
@@ -84,6 +84,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Category</th>
                                         <th>Sub Category</th>
                                         <th>Brand</th>
                                         <th class="text-center">Action</th>
@@ -93,6 +94,7 @@
                                     {% for row in all_brand %}
                                     <tr>
                                         <td>{{row.id}}</td>
+                                        <td>{{row.category}}</td>
                                         <td>{{row.subcategory}}</td>
                                         <td>{{row.name}}</td>
                                         <td class="text-center">
@@ -108,6 +110,5 @@
                 </div>
             </div>
         </div>
-            
-        
+
 {% endblock content %}

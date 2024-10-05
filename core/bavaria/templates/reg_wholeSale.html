@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Bavaria Production Management</title>
+  {% load static %}
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{% static 'vendors/ti-icons/css/themify-icons.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/base/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}"/>
+  <style>
+    input{
+        color:red;
+    }
+
+  </style>
+</head>
+
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+            <div class="col-lg-5 mx-auto">
+                <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                    <div class="brand-logo">
+                        <a href="{% url 'signupPage' %}"><img src="{% static 'images/logomain.svg' %}" alt="logo"></a>
+                    </div>
+                    <div class="group col-auto" role="group" aria-label="Basic example">
+                        <a href="{% url 'reg_wholeSale' %}" class="btn btn-warning m-2 text-white {% if request.path == '/reg_wholeSale/' %}btn-danger{% endif %}">WholeSale</a>
+                        <a href="{% url 'retailerReg' %}" class="btn btn-warning m-2 text-white {% if request.path == '/retailerReg/' %}btn-danger{% endif %}">Retailer Sale</a>
+                        <a href="{% url 'reg_unitReg' %}" class="btn btn-warning m-2 text-white {% if request.path == '/reg_unitReg/' %}btn-danger{% endif %}">Unit Sale</a>
+                        <a href="{% url 'reg_ProductionSale' %}" class="btn btn-warning m-2 text-white {% if request.path == '/reg_ProductionSale/' %}btn-danger{% endif %}">Prodiction Sale</a>
+                    </div>
+                    <h3 class="py-4 fs-5">WhoSale Form</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="supplierName">Supplier Name</label>
+                            <input type="text" class="form-control" id="supplierName" placeholder="Enter supplier name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productName">Product Name</label>
+                            <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" min="1" max="1000" placeholder="Enter quantity" required>
+                            <small class="form-text text-muted">Minimum: 1, Maximum: 1000</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="wholesalePrice">Wholesale Price per Unit ($)</label>
+                            <input type="number" class="form-control" id="wholesalePrice" placeholder="Enter wholesale price per unit" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="totalAmount">Total Amount ($)</label>
+                            <input type="text" class="form-control" id="totalAmount" placeholder="Total amount" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactInfo">Contact Information</label>
+                            <input type="text" class="form-control" id="contactInfo" placeholder="Enter contact information" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentTerms">Payment Terms</label>
+                            <select class="form-control" id="paymentTerms" required>
+                                <option value="" disabled selected>Select payment terms</option>
+                                <option value="Net 30">Net 30</option>
+                                <option value="Net 60">Net 60</option>
+                                <option value="Cash on Delivery">Cash on Delivery</option>
+                                <option value="Prepayment">Prepayment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country (Most Imported)</label>
+                            <select class="form-control" id="country" required>
+                                <option value="" disabled selected>Select country</option>
+                                <option value="USA">USA</option>
+                                <option value="China">China</option>
+                                <option value="Germany">Germany</option>
+                                <option value="Japan">Japan</option>
+                                <option value="India">India</option>
+                                <option value="UK">UK</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="saleMarketArea">Sale Market Area</label>
+                            <input type="text" class="form-control" id="saleMarketArea" placeholder="Enter sale market area" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <select class="form-control" id="state" required>
+                                <option value="" disabled selected>Select state</option>
+                                <option value="California">California</option>
+                                <option value="Texas">Texas</option>
+                                <option value="New York">New York</option>
+                                <option value="Ontario">Ontario</option>
+                                <option value="Quebec">Quebec</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <select class="form-control" id="city" required>
+                                <option value="" disabled selected>Select city</option>
+                                <option value="Los Angeles">Los Angeles</option>
+                                <option value="Toronto">Toronto</option>
+                                <option value="New York City">New York City</option>
+                                <option value="Vancouver">Vancouver</option>
+                                <option value="Montreal">Montreal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <textarea class="form-control" id="notes" rows="3" placeholder="Any additional notes"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <!-- plugins:js -->
+  <script src="{% static 'vendors/base/vendor.bundle.base.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="{% static 'vendors/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'js/jquery.cookie.js' %}" type="text/javascript"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'js/off-canvas.js' %}"></script>
+  <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'js/template.js' %}"></script>
+  <script src="{% static 'js/todolist.js' %}"></script>
+  <!-- endinject -->
+</body>
+
+</html>

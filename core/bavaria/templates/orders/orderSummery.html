@@ -79,17 +79,20 @@
                         <table class="table">
                         <thead>
                             <tr class="text-center">
-                                <th class="bg-success text-white fs-5" colspan="7">Order Details</th>
+                                <th class="bg-success text-white fs-5" colspan="10">Order Details</th>
                                 <th class="bg-danger text-white fs-5" colspan="13">Current Status</th>
                             </tr>
                             <tr class="text-center">
                                 <th>Category</th>
                                 <th>Sub-Category</th>
-                                <th>Order Reference</th>
+                                <th>Brand Name</th>
+                                <th>Order Number</th>
+                                <th>Product Name</th>
+                                <th>Fabric Details</th>
                                 <th>Order Date</th>
                                 <th>Delivery Date</th>
                                 <th>Name</th>
-                                <th>Quantity</th>
+                                <th style="border-right: 1px solid #c9ccd7;">Quantity</th>
                                 <th>Budget plan</th>
                                 <th>Machine Layout</th>
                                 <th>Machine Report</th>
@@ -110,35 +113,147 @@
                             <tr class="text-center">
                                 <td>{{row.category}}</td>
                                 <td>{{row.sub_category}}</td>
+                                <td>{{row.brandModel}}</td>
+                                <td>Product name</td>
+                                <td>Fabric details</td>
                                 <td>{{row.order_reference}}</td>
                                 <td>{{row.order_date|date:'d-M-Y'}}</td>
                                 <td>{{row.delivery_date}}</td>
                                 <td>{{row.name}}</td>
-                                <td>{{row.quantity}}</td>
+                                <td style="border-right: 1px solid #c9ccd7;">{{row.quantity}}</td>
                                 <td>
                                 <div class="row">
                                     <div class="col-md-12">
                                         {% if row.budget_plan == 'Pending' %}
-                                        <a class="btn btn-info text-white p-2 fs-6" href="{% url 'ab' %}?catid={{ row.category.id }}&subcatid={{ row.sub_category.id }}&orderid={{ row.id }}">Create</a>
+                                        <a class="btn btn-secondary text-white p-2 fs-6" href="{% url 'ab' %}?catid={{ row.category.id }}&subcatid={{ row.sub_category.id }}&orderid={{ row.id }}">Create</a>
                                         {% elif row.budget_plan == 'Created' %}
                                         <a class="h4" href="{% url 'getBudget' row.id %}"><i class="fa-regular fa-eye " style="color: #2a2b2c;"></i></a>
                                         {% else %}
                                         {% endif %}
                                     </div>
-                                    
-                                    
                                 </div>
                                 </td>
-                                <td>{{row.machine_layout}}</td>
-                                <td>{{row.machine_report}}</td>
-                                <td>{{row.purchase}}</td>
-                                <td>{{row.embroidery}}</td>
-                                <td>{{row.sewing}}</td>
-                                <td>{{row.production}}</td>
-                                <td>{{row.quality_check}}</td>
-                                <td>{{row.ironing}}</td>
-                                <td>{{row.packing}}</td>
-                                <td>{{row.shipping}}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary text-white p-2 fs-6" type="button" id="machineStatusDropdown{{ row.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-arrows-up-down-left-right" style="color: #fff;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="machineStatusDropdown{{ row.id }}">
+                                            <li><a class="dropdown-item" href="#">Start</a></li>
+                                            <li><a class="dropdown-item" href="#">On-going</a></li>
+                                            <li><a class="dropdown-item" href="#">End</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary text-white p-2 fs-6" type="button" id="machineStatusDropdown{{ row.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-arrows-up-down-left-right" style="color: #fff;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="machineStatusDropdown{{ row.id }}">
+                                            <li><a class="dropdown-item" href="#">Start</a></li>
+                                            <li><a class="dropdown-item" href="#">On-going</a></li>
+                                            <li><a class="dropdown-item" href="#">End</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary text-white p-2 fs-6" type="button" id="machineStatusDropdown{{ row.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-arrows-up-down-left-right" style="color: #fff;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="machineStatusDropdown{{ row.id }}">
+                                            <li><a class="dropdown-item" href="#">Start</a></li>
+                                            <li><a class="dropdown-item" href="#">On-going</a></li>
+                                            <li><a class="dropdown-item" href="#">End</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary text-white p-2 fs-6" type="button" id="machineStatusDropdown{{ row.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-arrows-up-down-left-right" style="color: #fff;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="machineStatusDropdown{{ row.id }}">
+                                            <li><a class="dropdown-item" href="#">Start</a></li>
+                                            <li><a class="dropdown-item" href="#">On-going</a></li>
+                                            <li><a class="dropdown-item" href="#">End</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary text-white p-2 fs-6" type="button" id="machineStatusDropdown{{ row.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-arrows-up-down-left-right" style="color: #fff;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="machineStatusDropdown{{ row.id }}">
+                                            <li><a class="dropdown-item" href="#">Start</a></li>
+                                            <li><a class="dropdown-item" href="#">On-going</a></li>
+                                            <li><a class="dropdown-item" href="#">End</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary text-white p-2 fs-6" type="button" id="machineStatusDropdown{{ row.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-arrows-up-down-left-right" style="color: #fff;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="machineStatusDropdown{{ row.id }}">
+                                            <li><a class="dropdown-item" href="#">Start</a></li>
+                                            <li><a class="dropdown-item" href="#">On-going</a></li>
+                                            <li><a class="dropdown-item" href="#">End</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary text-white p-2 fs-6" type="button" id="machineStatusDropdown{{ row.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-arrows-up-down-left-right" style="color: #fff;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="machineStatusDropdown{{ row.id }}">
+                                            <li><a class="dropdown-item" href="#">Start</a></li>
+                                            <li><a class="dropdown-item" href="#">On-going</a></li>
+                                            <li><a class="dropdown-item" href="#">End</a></li>
+                                        </ul>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary text-white p-2 fs-6" type="button" id="machineStatusDropdown{{ row.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-arrows-up-down-left-right" style="color: #fff;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="machineStatusDropdown{{ row.id }}">
+                                            <li><a class="dropdown-item" href="#">Start</a></li>
+                                            <li><a class="dropdown-item" href="#">On-going</a></li>
+                                            <li><a class="dropdown-item" href="#">End</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary text-white p-2 fs-6" type="button" id="machineStatusDropdown{{ row.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-arrows-up-down-left-right" style="color: #fff;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="machineStatusDropdown{{ row.id }}">
+                                            <li><a class="dropdown-item" href="#">Start</a></li>
+                                            <li><a class="dropdown-item" href="#">On-going</a></li>
+                                            <li><a class="dropdown-item" href="#">End</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary text-white p-2 fs-6" type="button" id="machineStatusDropdown{{ row.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-arrows-up-down-left-right" style="color: #fff;"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="machineStatusDropdown{{ row.id }}">
+                                            <li><a class="dropdown-item" href="#">Start</a></li>
+                                            <li><a class="dropdown-item" href="#">On-going</a></li>
+                                            <li><a class="dropdown-item" href="#">End</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
                                 <td>{{row.stock}}</td>
                                 <td class="text-center">
                                         <a class="text-danger text-decoration-none fs-5 p-2" href="{% url 'orderDelete' row.id %}"><i class="ti-trash"></i></a>

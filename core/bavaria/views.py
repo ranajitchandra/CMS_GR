@@ -81,7 +81,20 @@ def home(request):
 
 def retailerReg(request):
     
-    return render(request, "retailer_reg.html")
+    return render(request, "reg_retailer.html")
+
+
+def reg_unitReg(request):
+    
+    return render(request, "reg_unitReg.html")
+
+def reg_ProductionSale(request):
+    
+    return render(request, "reg_ProductionSale.html")
+
+def reg_wholeSale(request):
+    
+    return render(request, "reg_wholeSale.html")
 
 
 

@@ -16,6 +16,17 @@
                 <form action="" method="POST" class="forms-sample">
                     {% csrf_token %}
                     <div class="form-group">
+                        <label for="category">Client</label>
+                        <select name="cat" class="form-control" id="nb#">
+                            <option selected disabled>Select Client</option>
+                            <option selected>Wholesale</option>
+                            <option selected>Retailer Sale</option>
+                            <option selected>Unit Sale</option>
+                            <option selected>Production Sale</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="category">Category</label>
                         <select name="cat" class="form-control" id="category" onchange="updateCategory()">
                             <option selected disabled>Select Category</option>
@@ -56,15 +67,6 @@
                     </div>
 
 
-                    <div class="form-group">
-                        <label for="customerName">Name</label>
-                        <input name="name" type="text" class="form-control" id="customerName" placeholder="Name">
-                    </div>
-
-                    <div class="form-group d-flex align-items-center">
-                        <input type="text" class="form-control flex-grow-1" id="fabric" placeholder="Click to add fabric details" readonly>
-                        <button type="button" class="btn btn-secondary ms-1" data-toggle="modal" data-target="#fabricModal"><i class="fa-solid fa-plus" style="color: #f0f0f0;"></i></button>
-                    </div>
 
                     <div class="form-group">
                         <label for="orderDate">Order Date</label>
@@ -86,7 +88,55 @@
                         <textarea class="form-control" id="description" rows="3" name="description"></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <div class="form-group d-flex align-items-center">
+                        <input type="text" class="form-control flex-grow-1" id="fabric" placeholder="Click to add fabric details" readonly>
+                        <button type="button" class="btn btn-secondary ms-1" data-toggle="modal" data-target="#fabricModal"><i class="fa-solid fa-plus" style="color: #f0f0f0;"></i></button>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <input type="text" class="form-control flex-grow-1" id="cutting" placeholder="Click to add cutting details" readonly>
+                        <button type="button" class="btn btn-secondary ms-1" data-toggle="modal" data-target="#cuttingModal"><i class="fa-solid fa-plus" style="color: #f0f0f0;"></i></button>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <input type="text" class="form-control flex-grow-1" id="embroidery" placeholder="Click to add Embroidery details" readonly>
+                        <button type="button" class="btn btn-secondary ms-1" data-toggle="modal" data-target="#embroideryModal">
+                            <i class="fa-solid fa-plus" style="color: #f0f0f0;"></i>
+                        </button>
+                    </div>
+
+                    <div class="form-group d-flex align-items-center">
+                        <input type="text" class="form-control flex-grow-1" id="sewing" placeholder="Click to add Sewing details" readonly>
+                        <button type="button" class="btn btn-secondary ms-1" data-toggle="modal" data-target="#sewingModal">
+                            <i class="fa-solid fa-plus" style="color: #f0f0f0;"></i>
+                        </button>
+                    </div>
+
+                    <div class="form-group d-flex align-items-center">
+                        <input type="text" class="form-control flex-grow-1" id="qualityCheck" placeholder="Click to add Quality Check" readonly>
+                        <button type="button" class="btn btn-secondary ms-1" data-toggle="modal" data-target="#qualityCheckModal">
+                            <i class="fa-solid fa-plus" style="color: #f0f0f0;"></i>
+                        </button>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <input type="text" class="form-control flex-grow-1" id="ironing" placeholder="Click to add Ironing" readonly>
+                        <button type="button" class="btn btn-secondary ms-1" data-toggle="modal" data-target="#ironingModal">
+                            <i class="fa-solid fa-plus" style="color: #f0f0f0;"></i>
+                        </button>
+                    </div>
+
+                    <div class="form-group d-flex align-items-center">
+                        <input type="text" class="form-control flex-grow-1" id="packing" placeholder="Click to add Packing" readonly>
+                        <button type="button" class="btn btn-secondary ms-1" data-toggle="modal" data-target="#packingModal">
+                            <i class="fa-solid fa-plus" style="color: #f0f0f0;"></i>
+                        </button>
+                    </div>
+
+                    <div class="form-group d-flex align-items-center">
+                        <input type="text" class="form-control flex-grow-1" id="shipping" placeholder="Click to add Shipping" readonly>
+                        <button type="button" class="btn btn-secondary ms-1" data-toggle="modal" data-target="#shippingModal">
+                            <i class="fa-solid fa-plus" style="color: #f0f0f0;"></i>
+                        </button>
+                    </div>
+                    <button type="submit" class="btn btn-warning me-2 text-white">Submit</button>
                 </form>
             </div>
         </div>
@@ -119,6 +169,10 @@
                         <input type="text" class="form-control" id="fabricWidth" placeholder="Enter fabric width" required>
                     </div>
                     <div class="form-group">
+                        <label for="fabricWidth">Fabric Height</label>
+                        <input type="text" class="form-control" id="fabricWidth" placeholder="Enter fabric Height" required>
+                    </div>
+                    <div class="form-group">
                         <label for="fabricGSM">Fabric GSM</label>
                         <input type="text" class="form-control" id="fabricGSM" placeholder="Enter fabric GSM" required>
                     </div>
@@ -126,10 +180,19 @@
                         <label for="fabricComposition">Fabric Composition</label>
                         <input type="text" class="form-control" id="fabricComposition" placeholder="Enter fabric composition" required>
                     </div>
+                    
                     <div class="form-group">
                         <label for="careInstructions">Care Instructions</label>
                         <textarea class="form-control" id="careInstructions" rows="3" placeholder="Enter care instructions" required></textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="FabricAttachmentFile">Attachment File</label>
+                        <div class="d-flex align-items-center show_item">
+                            <input type="file" class="form-control flex-grow-1 me-2" id="FabricAttachmentFile" required>
+                            <button type="button" class="btn btn-secondary" id="addFabricAttachmentFile"><i class="fa-solid fa-plus" style="color: #ededed;"></i></button>
+                        </div>
+                    </div>
+                    <div id="FabricDetailsForm"></div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -138,7 +201,293 @@
         </div>
     </div>
 </div>
+<!-- Cutting Modal -->
+<div class="modal fade" id="cuttingModal" tabindex="-1" aria-labelledby="cuttingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cuttingModalLabel">Cutting Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="cuttingDetailsForm">
+                    <div class="form-group">
+                        <label for="cuttingStartDate">Start Date</label>
+                        <input type="text" class="form-control" id="cuttingStartDate" placeholder="Enter Start Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cuttingEndDate">End Date</label>
+                        <input type="text" class="form-control" id="cuttingEndDate" placeholder="Enter End Date" required>
+                    </div>
+                      
+                    <div class="form-group">
+                        <label for="cuttingCareInstructions">Care Instructions</label>
+                        <textarea class="form-control" id="cuttingCareInstructions" rows="3" placeholder="Enter care instructions" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="CuttingAttachmentFile">Attachment File</label>
+                        <div class="d-flex align-items-center show_item">
+                            <input type="file" class="form-control flex-grow-1 me-2" id="CuttingAttachmentFile" required>
+                            <button type="button" class="btn btn-secondary" id="addCuttingAttachmentFile"><i class="fa-solid fa-plus" style="color: #ededed;"></i></button>
+                        </div>
+                    </div>
+                    <div id="CuttingDetailsForm"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning text-white" id="saveCuttingDetails" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Embroidery Modal -->
+<div class="modal fade" id="embroideryModal" tabindex="-1" aria-labelledby="embroideryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="embroideryModalLabel">Embroidery Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="embroideryDetailsForm">
+                    <div class="form-group">
+                        <label for="embroideryStartDate">Start Date</label>
+                        <input type="text" class="form-control" id="embroideryStartDate" placeholder="Enter Start Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="embroideryEndDate">End Date</label>
+                        <input type="text" class="form-control" id="embroideryEndDate" placeholder="Enter End Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="embroideryCareInstructions">Care Instructions</label>
+                        <textarea class="form-control" id="embroideryCareInstructions" rows="3" placeholder="Enter care instructions" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="EmbroideryAttachmentFile">Attachment File</label>
+                        <div class="d-flex align-items-center show_item">
+                            <input type="file" class="form-control flex-grow-1 me-2" id="EmbroideryAttachmentFile" required>
+                            <button type="button" class="btn btn-secondary" id="addEmbroideryAttachmentFile"><i class="fa-solid fa-plus" style="color: #ededed;"></i></button>
+                        </div>
+                    </div>
+                    <div id="EmbroideryDetailsForm"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning text-white" id="saveEmbroideryDetails" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Sewing Modal -->
+<div class="modal fade" id="sewingModal" tabindex="-1" aria-labelledby="sewingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sewingModalLabel">Sewing Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="sewingDetailsForm">
+                    <div class="form-group">
+                        <label for="sewingStartDate">Start Date</label>
+                        <input type="text" class="form-control" id="sewingStartDate" placeholder="Enter Start Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sewingEndDate">End Date</label>
+                        <input type="text" class="form-control" id="sewingEndDate" placeholder="Enter End Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sewingCareInstructions">Care Instructions</label>
+                        <textarea class="form-control" id="sewingCareInstructions" rows="3" placeholder="Enter care instructions" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="SewingAttachmentFile">Attachment File</label>
+                        <div class="d-flex align-items-center show_item">
+                            <input type="file" class="form-control flex-grow-1 me-2" id="SewingAttachmentFile" required>
+                            <button type="button" class="btn btn-secondary" id="addSewingAttachmentFile"><i class="fa-solid fa-plus" style="color: #ededed;"></i></button>
+                        </div>
+                    </div>
+                    <div id="SewingDetailsForm"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning text-white" id="saveSewingDetails" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quality Check Modal -->
+<div class="modal fade" id="qualityCheckModal" tabindex="-1" aria-labelledby="qualityCheckModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="qualityCheckModalLabel">Quality Check Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="qualityCheckDetailsForm">
+                    <div class="form-group">
+                        <label for="qualityCheckStartDate">Start Date</label>
+                        <input type="text" class="form-control" id="qualityCheckStartDate" placeholder="Enter Start Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="qualityCheckEndDate">End Date</label>
+                        <input type="text" class="form-control" id="qualityCheckEndDate" placeholder="Enter End Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="qualityCheckCareInstructions">Care Instructions</label>
+                        <textarea class="form-control" id="qualityCheckCareInstructions" rows="3" placeholder="Enter care instructions" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="QCAttachmentFile">Attachment File</label>
+                        <div class="d-flex align-items-center show_item">
+                            <input type="file" class="form-control flex-grow-1 me-2" id="QCAttachmentFile" required>
+                            <button type="button" class="btn btn-secondary" id="addQCAttachmentFile"><i class="fa-solid fa-plus" style="color: #ededed;"></i></button>
+                        </div>
+                    </div>
+                    <div id="QualityDetailsForm"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning text-white" id="saveQualityCheckDetails" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ironing Modal -->
+<div class="modal fade" id="ironingModal" tabindex="-1" aria-labelledby="ironingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ironingModalLabel">Ironing Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="ironingDetailsForm">
+                    <div class="form-group">
+                        <label for="ironingStartDate">Start Date</label>
+                        <input type="text" class="form-control" id="ironingStartDate" placeholder="Enter Start Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ironingEndDate">End Date</label>
+                        <input type="text" class="form-control" id="ironingEndDate" placeholder="Enter End Date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ironingCareInstructions">Care Instructions</label>
+                        <textarea class="form-control" id="ironingCareInstructions" rows="3" placeholder="Enter care instructions" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="IroningAttachmentFile">Attachment File</label>
+                        <div class="d-flex align-items-center show_item">
+                            <input type="file" class="form-control flex-grow-1 me-2" id="IroningAttachmentFile" required>
+                            <button type="button" class="btn btn-secondary" id="addIroningAttachmentFile"><i class="fa-solid fa-plus" style="color: #ededed;"></i></button>
+                        </div>
+                    </div>
+                    <div id="IroningDetailsForm"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning text-white" id="saveIroningDetails" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Packing Modal -->
+<div class="modal fade" id="packingModal" tabindex="-1" aria-labelledby="packingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="packingModalLabel">Packing Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="packingDetailsForm">
+                    <div class="form-group">
+                        <label for="packingStartDate">Start Date</label>
+                        <input type="text" class="form-control" id="packingStartDate" placeholder="Enter Start Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="packingEndDate">End Date</label>
+                        <input type="text" class="form-control" id="packingEndDate" placeholder="Enter End Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="packingCareInstructions">Care Instructions</label>
+                        <textarea class="form-control" id="packingCareInstructions" rows="3" placeholder="Enter care instructions" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="PackingAttachmentFile">Attachment File</label>
+                        <div class="d-flex align-items-center show_item">
+                            <input type="file" class="form-control flex-grow-1 me-2" id="PackingAttachmentFile" required>
+                            <button type="button" class="btn btn-secondary" id="addPackingAttachmentFile"><i class="fa-solid fa-plus" style="color: #ededed;"></i></button>
+                        </div>
+                    </div>
+                    <div id="packingDetailsForm"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning text-white" id="savePackingDetails" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Shipping Modal -->
+<div class="modal fade" id="shippingModal" tabindex="-1" aria-labelledby="shippingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shippingModalLabel">Shipping Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="shippingDetailsForm">
+                    <div class="form-group">
+                        <label for="shippingStartDate">Start Date</label>
+                        <input type="text" class="form-control" id="shippingStartDate" placeholder="Enter Start Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shippingEndDate">End Date</label>
+                        <input type="text" class="form-control" id="shippingEndDate" placeholder="Enter End Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shippingCareInstructions">Care Instructions</label>
+                        <textarea class="form-control" id="shippingCareInstructions" rows="3" placeholder="Enter care instructions" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="ShippingAttachmentFile">Attachment File</label>
+                        <div class="d-flex align-items-center show_item">
+                            <input type="file" class="form-control flex-grow-1 me-2" id="ShippingAttachmentFile" required>
+                            <button type="button" class="btn btn-secondary" id="addShippingAttachmentFile"><i class="fa-solid fa-plus" style="color: #ededed;"></i></button>
+                        </div>
+                    </div>
+                    <div id="additionalAttachments"></div> <!-- Container for additional attachments -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning text-white" id="saveShippingDetails" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     function updateCategory() {
         const categoryId = document.getElementById('category').value;
@@ -175,5 +524,224 @@
         // Reset the modal fields after saving
         document.getElementById('fabricDetailsForm').reset();
     };
+
+    document.getElementById('saveCuttingDetails').onclick = function() {
+        const cuttingStartDate = document.getElementById('cuttingStartDate').value;
+        const cuttingEndDate = document.getElementById('cuttingEndDate').value;
+        const cuttingCareInstructions = document.getElementById('cuttingCareInstructions').value;
+
+        const cuttingDetails = `Start Date: ${cuttingStartDate}, End Date: ${cuttingEndDate}, Care: ${cuttingCareInstructions}`;
+        document.getElementById('cutting').value = cuttingDetails;
+
+        // Reset the modal fields after saving
+        document.getElementById('cuttingDetailsForm').reset();
+    };
+
+    document.getElementById('saveEmbroideryDetails').onclick = function() {
+    const embroideryStartDate = document.getElementById('embroideryStartDate').value;
+    const embroideryEndDate = document.getElementById('embroideryEndDate').value;
+    const embroideryCareInstructions = document.getElementById('embroideryCareInstructions').value;
+
+    const embroideryDetails = `Start Date: ${embroideryStartDate}, End Date: ${embroideryEndDate}, Care: ${embroideryCareInstructions}`;
+    document.getElementById('embroidery').value = embroideryDetails;
+
+    // Reset the modal fields after saving
+    document.getElementById('embroideryDetailsForm').reset();
+    $('#embroideryModal').modal('hide'); // Hide the modal
+};
+
+document.getElementById('saveSewingDetails').onclick = function() {
+    const sewingStartDate = document.getElementById('sewingStartDate').value;
+    const sewingEndDate = document.getElementById('sewingEndDate').value;
+    const sewingCareInstructions = document.getElementById('sewingCareInstructions').value;
+
+    const sewingDetails = `Start Date: ${sewingStartDate}, End Date: ${sewingEndDate}, Care: ${sewingCareInstructions}`;
+    document.getElementById('sewing').value = sewingDetails;
+
+    // Reset the modal fields after saving
+    document.getElementById('sewingDetailsForm').reset();
+    $('#sewingModal').modal('hide'); // Hide the modal
+};
+
+document.getElementById('saveQualityCheckDetails').onclick = function() {
+    const qualityCheckStartDate = document.getElementById('qualityCheckStartDate').value;
+    const qualityCheckEndDate = document.getElementById('qualityCheckEndDate').value;
+    const qualityCheckCareInstructions = document.getElementById('qualityCheckCareInstructions').value;
+
+    const qualityCheckDetails = `Start Date: ${qualityCheckStartDate}, End Date: ${qualityCheckEndDate}, Care: ${qualityCheckCareInstructions}`;
+    document.getElementById('qualityCheck').value = qualityCheckDetails;
+
+    // Reset the modal fields after saving
+    document.getElementById('qualityCheckDetailsForm').reset();
+    $('#qualityCheckModal').modal('hide'); // Hide the modal
+};
+
+document.getElementById('saveIroningDetails').onclick = function() {
+    const ironingStartDate = document.getElementById('ironingStartDate').value;
+    const ironingEndDate = document.getElementById('ironingEndDate').value;
+    const ironingCareInstructions = document.getElementById('ironingCareInstructions').value;
+
+    const ironingDetails = `Start Date: ${ironingStartDate}, End Date: ${ironingEndDate}, Care: ${ironingCareInstructions}`;
+    document.getElementById('ironing').value = ironingDetails;
+
+    // Reset the modal fields after saving
+    document.getElementById('ironingDetailsForm').reset();
+    $('#ironingModal').modal('hide'); // Hide the modal
+};
+
+document.getElementById('savePackingDetails').onclick = function() {
+    const packingStartDate = document.getElementById('packingStartDate').value;
+    const packingEndDate = document.getElementById('packingEndDate').value;
+    const packingCareInstructions = document.getElementById('packingCareInstructions').value;
+
+    const packingDetails = `Start Date: ${packingStartDate}, End Date: ${packingEndDate}, Care: ${packingCareInstructions}`;
+    document.getElementById('packing').value = packingDetails;
+
+    // Reset the modal fields after saving
+    document.getElementById('packingDetailsForm').reset();
+    $('#packingModal').modal('hide'); // Hide the modal
+};
+
+document.getElementById('saveShippingDetails').onclick = function() {
+    const shippingStartDate = document.getElementById('shippingStartDate').value;
+    const shippingEndDate = document.getElementById('shippingEndDate').value;
+    const shippingCareInstructions = document.getElementById('shippingCareInstructions').value;
+
+    const shippingDetails = `Start Date: ${shippingStartDate}, End Date: ${shippingEndDate}, Care: ${shippingCareInstructions}`;
+    document.getElementById('shipping').value = shippingDetails;
+
+    // Reset the modal fields after saving
+    document.getElementById('shippingDetailsForm').reset();
+    $('#shippingModal').modal('hide'); // Hide the modal
+};
+
+
+
+
+
+$(document).ready(function() {
+
+    // Add attachment for Fabric modal
+    $("#addFabricAttachmentFile").click(function(e) {
+        e.preventDefault();
+        const packingAttachmentDiv = `
+            <div class="form-group d-flex align-items-center mt-2">
+                <input type="file" class="form-control flex-grow-1 me-2" required>
+                <button type="button" class="btn btn-danger remove_item_btn"><i class="fa-solid fa-minus" style="color: #ffffff;"></i></button>
+            </div>
+        `;
+        $("#FabricDetailsForm").append(packingAttachmentDiv);
+    });
+
+
+    // Add attachment for Cutting modal
+    $("#addCuttingAttachmentFile").click(function(e) {
+        e.preventDefault();
+        const packingAttachmentDiv = `
+            <div class="form-group d-flex align-items-center mt-2">
+                <input type="file" class="form-control flex-grow-1 me-2" required>
+                <button type="button" class="btn btn-danger remove_item_btn"><i class="fa-solid fa-minus" style="color: #ffffff;"></i></button>
+            </div>
+        `;
+        $("#CuttingDetailsForm").append(packingAttachmentDiv);
+    });
+
+
+    // Add attachment for Embroidery modal
+    $("#addEmbroideryAttachmentFile").click(function(e) {
+        e.preventDefault();
+        const packingAttachmentDiv = `
+            <div class="form-group d-flex align-items-center mt-2">
+                <input type="file" class="form-control flex-grow-1 me-2" required>
+                <button type="button" class="btn btn-danger remove_item_btn"><i class="fa-solid fa-minus" style="color: #ffffff;"></i></button>
+            </div>
+        `;
+        $("#EmbroideryDetailsForm").append(packingAttachmentDiv);
+    });
+
+
+    // Add attachment for Sewing modal
+    $("#addSewingAttachmentFile").click(function(e) {
+        e.preventDefault();
+        const packingAttachmentDiv = `
+            <div class="form-group d-flex align-items-center mt-2">
+                <input type="file" class="form-control flex-grow-1 me-2" required>
+                <button type="button" class="btn btn-danger remove_item_btn"><i class="fa-solid fa-minus" style="color: #ffffff;"></i></button>
+            </div>
+        `;
+        $("#SewingDetailsForm").append(packingAttachmentDiv);
+    });
+
+
+    // Add attachment for Quality modal
+    $("#addQCAttachmentFile").click(function(e) {
+        e.preventDefault();
+        const packingAttachmentDiv = `
+            <div class="form-group d-flex align-items-center mt-2">
+                <input type="file" class="form-control flex-grow-1 me-2" required>
+                <button type="button" class="btn btn-danger remove_item_btn"><i class="fa-solid fa-minus" style="color: #ffffff;"></i></button>
+            </div>
+        `;
+        $("#QualityDetailsForm").append(packingAttachmentDiv);
+    });
+
+
+    // Add attachment for Ironing modal
+    $("#addIroningAttachmentFile").click(function(e) {
+        e.preventDefault();
+        const packingAttachmentDiv = `
+            <div class="form-group d-flex align-items-center mt-2">
+                <input type="file" class="form-control flex-grow-1 me-2" required>
+                <button type="button" class="btn btn-danger remove_item_btn"><i class="fa-solid fa-minus" style="color: #ffffff;"></i></button>
+            </div>
+        `;
+        $("#IroningDetailsForm").append(packingAttachmentDiv);
+    });
+
+
+    // Add attachment for packing modal
+    $("#addPackingAttachmentFile").click(function(e) {
+        e.preventDefault();
+        const packingAttachmentDiv = `
+            <div class="form-group d-flex align-items-center mt-2">
+                <input type="file" class="form-control flex-grow-1 me-2" required>
+                <button type="button" class="btn btn-danger remove_item_btn"><i class="fa-solid fa-minus" style="color: #ffffff;"></i></button>
+            </div>
+        `;
+        $("#packingDetailsForm").append(packingAttachmentDiv);
+    });
+
+
+    // Add attachment for packing modal
+    $("#addPackingAttachmentFile").click(function(e) {
+        e.preventDefault();
+        const packingAttachmentDiv = `
+            <div class="form-group d-flex align-items-center mt-2">
+                <input type="file" class="form-control flex-grow-1 me-2" required>
+                <button type="button" class="btn btn-danger remove_item_btn"><i class="fa-solid fa-minus" style="color: #ffffff;"></i></button>
+            </div>
+        `;
+        $("#packingDetailsForm").append(packingAttachmentDiv);
+    });
+
+
+    // Add attachment for shipping modal
+    $("#addShippingAttachmentFile").click(function(e) {
+        e.preventDefault();
+        const shippingAttachmentDiv = `
+            <div class="form-group d-flex align-items-center mt-2">
+                <input type="file" class="form-control flex-grow-1 me-2" required>
+                <button type="button" class="btn btn-danger remove_item_btn"><i class="fa-solid fa-minus" style="color: #ffffff;"></i></button>
+            </div>
+        `;
+        $("#additionalAttachments").append(shippingAttachmentDiv);
+    });
+
+    // Remove attachment functionality
+    $(document).on("click", ".remove_item_btn", function(e) {
+        e.preventDefault();
+        $(this).closest('.form-group').remove();
+    });
+});
 </script>
 {% endblock content %}

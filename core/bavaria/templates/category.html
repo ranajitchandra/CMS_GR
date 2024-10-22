@@ -110,5 +110,22 @@
                 </div>
             </div>
         </div>
+            <div class="col-lg-5 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <nav>
+                            <ul>
+                                {% for i in categories %}
+                                <li>{{i.id}}</li>
+                                <li>{% for j in category.subcategories.all %}
+                                        {{j.id}}
+                                    {% endfor %}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
 
 {% endblock content %}

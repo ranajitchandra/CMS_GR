@@ -20,7 +20,7 @@ from django.urls import path
 from bavaria.views import *
 from bavaria.orderViews import *
 from bavaria.budgetViews import *
-
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -66,4 +66,4 @@ urlpatterns = [
 
 
 
-] 
+] + debug_toolbar_urls()

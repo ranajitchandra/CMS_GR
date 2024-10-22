@@ -59,10 +59,9 @@ def signin(request):
     if request.method=='POST':
         user_email=request.POST.get('email')
         pass_word=request.POST.get('pass')
-        print('p', user_email)
-        print('ppp', pass_word)
+        
         user_login=authenticate(username=user_email, password=pass_word)
-        print(user_login)
+        
         if user_login:
             login(request, user_login)
             return redirect('home')
@@ -103,13 +102,33 @@ def reg_wholeSale(request):
 @login_required
 def categoryPage(request):
     allcategory=categoryModel.objects.all()
+    categories = categoryModel.objects.prefetch_related('subcategories').all()
+
+    for i in allcategory:
+        print("cat id_", i.id)
+        for j in sub_categoryModel.objects.filter(id=i.id):
+            print("subcat id_", j.id)
+            for k in brandNmaeModel.objects.filter(id=j.id):
+                print("Brand id_", k.id)
+
+
+
+
+
+    data = []
+    b = brandNmaeModel.objects.select_related('category').all()
+    data = [d.category.name for d in b]
+
     all_sub_category=sub_categoryModel.objects.all()
     brandNma=brandNmaeModel.objects.all()
     context = {
             'allcat' : allcategory,
             'all_sub_cat' : all_sub_category,
             'all_brand' : brandNma,
+            'allopt' : data,
+            'categories' : categories,
         }
+    
     return render(request, "category.html", context)
 
 
@@ -191,7 +210,7 @@ def categoryDelete(request, catid):
 @login_required
 def categoryEdit(request, catid):
     get_cat = categoryModel.objects.get(id = catid)
-    print(get_cat)
+    
     return render(request, 'categoryEdit.html', {'target_cat': get_cat})
 
 
@@ -245,7 +264,7 @@ def subCategoryDelete(request, subCatid):
 @login_required
 def subCategoryEdit(request, subCatid):
     get_subCat = sub_categoryModel.objects.get(id = subCatid)
-    print(get_subCat)
+    
     return render(request, 'subCategoryEdit.html', {'target_subcat': get_subCat})
 
 
@@ -257,7 +276,7 @@ def subCategoryUpadte(request):
         uCat=request.POST.get('uCat')
         uCatobj = get_object_or_404(categoryModel, id=uCat)
         subCategory_name=request.POST.get('subCatName')
-        print(subCategory_name)
+        
         save_subCategory = sub_categoryModel(
             id=subCategory_id,
             category=uCatobj,
@@ -471,14 +490,14 @@ def ab(request):
     
     if request.method=="POST":
         catid=request.POST.get('cat')
-        print('aaaaaaa', catid)
+        
         cat = get_object_or_404(categoryModel, id=catid)
         print(cat)
         subcatid=request.POST.get('subcat')
-        print('bbbbbb', subcatid)
+        
         
         subcat = get_object_or_404(sub_categoryModel, id=subcatid)
-        print(subcatid)
+        
         orderRef=request.POST.get('order')
         orRef = get_object_or_404(Order, id=orderRef)
 
